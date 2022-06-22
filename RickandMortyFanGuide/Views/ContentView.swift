@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var model = CharacterViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ForEach(model.characterData?.results ?? []) {
+            n in
+            Text(n.name)
+        }
     }
 }
 

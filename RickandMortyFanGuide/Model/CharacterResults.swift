@@ -8,18 +8,18 @@
 import Foundation
 
 struct Character: Codable {
-    var results: [Results]
+    var results: [CharacterResults]
     
 }
 
 
-struct Results: Codable, Identifiable {
+struct CharacterResults: Codable, Identifiable {
     let id = UUID()
     var name: String
     var status: String
     var species: String
-    var origin: [Origin]
-    var Location: [Location]
+    var origin: Origin
+    var location: Location
 }
 
 struct Origin: Codable {
