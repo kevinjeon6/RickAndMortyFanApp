@@ -118,6 +118,8 @@
 			dependencies = (
 			);
 			name = RickandMortyFanGuide;
+			packageProductDependencies = (
+			);
 			productName = RickandMortyFanGuide;
 			productReference = 749E5120285CE050007CBFBA /* RickandMortyFanGuide.app */;
 			productType = "com.apple.product-type.application";
@@ -146,6 +148,8 @@
 				Base,
 			);
 			mainGroup = 749E5117285CE050007CBFBA;
+			packageReferences = (
+			);
 			productRefGroup = 749E5121285CE050007CBFBA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
