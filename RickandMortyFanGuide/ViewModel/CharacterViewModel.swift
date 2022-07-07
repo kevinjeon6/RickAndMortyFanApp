@@ -66,7 +66,9 @@ class CharacterViewModel: ObservableObject {
 //    }//func getCharacter
 
 
-    //
+    //MARK: - Fetch all Characters
+    
+    //Closure is going to provide all the character data for that particular page number
     func fetchallCharacters(page: Int, completion: @escaping ((Character) -> ())) {
         guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(page)") else {
             fatalError("Bad URL")
@@ -87,6 +89,7 @@ class CharacterViewModel: ObservableObject {
                 let result = try decoder.decode(Character.self, from: data!)
                 
                 DispatchQueue.main.async {
+                    //Calling our completion closure which passes in the result
                     completion(result)
                 }
             } catch {
@@ -100,6 +103,7 @@ class CharacterViewModel: ObservableObject {
     
     //MARK: - Next page
     func nextPage(page: Int) {
+        //adding weak self since it is calling on the background
         fetchallCharacters(page: page) { [weak self ] char in
             self?.characterData = char
         }
@@ -112,6 +116,9 @@ class CharacterViewModel: ObservableObject {
             self?.characterData = char
         }
     }
+    
+    
+    
     
     
 }

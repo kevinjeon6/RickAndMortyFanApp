@@ -12,20 +12,16 @@ import SwiftUI
 
 
 struct Character: Codable {
-    
-    var info: Info
+   
     var results: [CharacterResults]
 }
 
 
-struct Info: Codable {
-    var count: Int
-    var pages: Int
-    var next: String?
-    let prev: String?
-}
+
 
 struct CharacterResults: Codable, Identifiable {
+    
+
     
     let id = UUID()
     var name: String?
@@ -34,7 +30,9 @@ struct CharacterResults: Codable, Identifiable {
     var origin: Origin?
     var location: Location?
     var image: String?
+    
 
+   
 }
 
 struct Origin: Codable {
