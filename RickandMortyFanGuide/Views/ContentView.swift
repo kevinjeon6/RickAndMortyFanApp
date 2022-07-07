@@ -8,45 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var model = CharacterViewModel()
+    @StateObject var model = CharacterViewModel()
     @State private var page = 1
     
     var body: some View {
-//        ForEach(model.characterData?.results ?? []) {
-//            n in
-//            Text(n.name ?? "")
-//        }
+
         
         NavigationView {
             List {
+                
                 ForEach(self.model.characterData?.results ?? []) { character in
-                    Text(character.name ?? "")
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            AsyncImage(url: URL(string: character.image ?? "")){ phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                } else if phase.error != nil {
+                                    Text("Couldn't load image")
+                                } else {
+                                    ProgressView()
+                                }
+                            }
+                            .frame(width: 128, height: 128)
+                                
+                            Text(character.name ?? "")
+                        }
+                    }
+                    
+
+                
+                    
+                   
                     
                 }
             }
             .navigationBarItems(leading:
-            page > 1 ?
+            self.page > 1 ?
                 Button("Previous") {
-                    
-                    
-                    
-                    page -= 1
+                self.page -= 1
                     model.previousPage(page: self.page)
-                    
-                    
-            } : nil , trailing:
-                                    page <= 43 ?
-                                    
-                                    Button("Next") {
-                page += 1
+            } : nil,
+            trailing:
+            self.page <= 43 ?
+            Button("Next") {
+                self.page += 1
                 model.nextPage(page: self.page)
             } : nil )
-            
         }
-        
-        
-       
-        
     }
 }
 
