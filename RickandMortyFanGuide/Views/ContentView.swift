@@ -18,30 +18,7 @@ struct ContentView: View {
           
                 List {
                         ForEach(self.model.characterData?.results ?? []) { character in
-                            
-                                HStack {
-                                    AsyncImage(url: URL(string: character.image ?? "")){ phase in
-                                        if let image = phase.image {
-                                            image
-                                                .resizable()
-                                                .scaledToFit()
-                                        } else if phase.error != nil {
-                                            Text("Couldn't load image")
-                                        } else {
-                                            ProgressView()
-                                        }
-                                    }
-                                    .frame(width: 100, height: 100)
-                                   
-                                    VStack(alignment: .trailing) {
-                                        Text(character.name ?? "")
-                                            .font(.title2)
-                                    }
-                                      
-                                }
-                            
-                            
-                            
+                            CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
                         }
                     
                 }
