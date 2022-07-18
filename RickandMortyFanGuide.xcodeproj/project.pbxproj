@@ -15,6 +15,7 @@
 		749E512B285CE058007CBFBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749E512A285CE058007CBFBA /* Preview Assets.xcassets */; };
 		749E5133285CE222007CBFBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749E5132285CE222007CBFBA /* LaunchScreen.storyboard */; };
 		74B58F5E2877594200EBC2F3 /* CharacterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */; };
+		74B9B963287874540042889A /* CharacterDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B9B962287874540042889A /* CharacterDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		749E5131285CE13B007CBFBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		749E5132285CE222007CBFBA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRowView.swift; sourceTree = "<group>"; };
+		74B9B962287874540042889A /* CharacterDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +46,9 @@
 		7485ADF6285D063E00905391 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				749E5125285CE050007CBFBA /* ContentView.swift */,
 				74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */,
+				74B9B962287874540042889A /* CharacterDetailsView.swift */,
+				74B9B9612878735D0042889A /* MainScreen */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +106,14 @@
 				749E512A285CE058007CBFBA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		74B9B9612878735D0042889A /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				749E5125285CE050007CBFBA /* ContentView.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +196,7 @@
 				749E5126285CE050007CBFBA /* ContentView.swift in Sources */,
 				749E5124285CE050007CBFBA /* RickandMortyFanGuideApp.swift in Sources */,
 				74B58F5E2877594200EBC2F3 /* CharacterRowView.swift in Sources */,
+				74B9B963287874540042889A /* CharacterDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

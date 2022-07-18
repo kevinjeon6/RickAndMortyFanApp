@@ -18,7 +18,13 @@ struct ContentView: View {
           
                 List {
                         ForEach(self.model.characterData?.results ?? []) { character in
-                            CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
+                            
+                            NavigationLink {
+                                CharacterDetailsView(character: model)
+                            } label: {
+                                
+                                CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
+                            }
                         }
                     
                 }
