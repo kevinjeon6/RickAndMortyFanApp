@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74353AB02885E36700F8B2EB /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74353AAF2885E36700F8B2EB /* ViewExtension.swift */; };
 		7485ADFA285D06AD00905391 /* CharacterResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7485ADF9285D06AD00905391 /* CharacterResults.swift */; };
 		7485ADFC285D0C9200905391 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7485ADFB285D0C9200905391 /* CharacterViewModel.swift */; };
 		749E5124285CE050007CBFBA /* RickandMortyFanGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749E5123285CE050007CBFBA /* RickandMortyFanGuideApp.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		74353AAF2885E36700F8B2EB /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		7485ADF9285D06AD00905391 /* CharacterResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResults.swift; sourceTree = "<group>"; };
 		7485ADFB285D0C9200905391 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		749E5120285CE050007CBFBA /* RickandMortyFanGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickandMortyFanGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74353AAE2885E10300F8B2EB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				74353AAF2885E36700F8B2EB /* ViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7485ADF6285D063E00905391 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 			children = (
 				749E5131285CE13B007CBFBA /* Info.plist */,
 				749E5123285CE050007CBFBA /* RickandMortyFanGuideApp.swift */,
+				74353AAE2885E10300F8B2EB /* Extensions */,
 				7485ADF7285D064500905391 /* Model */,
 				7485ADF8285D064B00905391 /* ViewModel */,
 				7485ADF6285D063E00905391 /* Views */,
@@ -194,6 +205,7 @@
 				7485ADFC285D0C9200905391 /* CharacterViewModel.swift in Sources */,
 				7485ADFA285D06AD00905391 /* CharacterResults.swift in Sources */,
 				749E5126285CE050007CBFBA /* ContentView.swift in Sources */,
+				74353AB02885E36700F8B2EB /* ViewExtension.swift in Sources */,
 				749E5124285CE050007CBFBA /* RickandMortyFanGuideApp.swift in Sources */,
 				74B58F5E2877594200EBC2F3 /* CharacterRowView.swift in Sources */,
 				74B9B963287874540042889A /* CharacterDetailsView.swift in Sources */,

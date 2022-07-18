@@ -42,6 +42,7 @@ struct ContentView: View {
                     model.nextPage(page: self.page)
             } : nil )
             }
+        .phoneOnlyNavigationView()
     }
 }
 
