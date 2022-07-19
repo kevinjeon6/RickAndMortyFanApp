@@ -101,18 +101,35 @@ struct CharacterDetailsView: View {
                 }
                 
                 Button {
-                isFavorited = true
+                    isFavorited.toggle()
                    
                   
                 } label: {
                     ZStack {
-                        Capsule()
-                            .stroke(lineWidth: 4)
-                            .frame(width: 250, height: 50)
+                        if isFavorited == false {
+                            Capsule()
+                                .strokeBorder(Color.green, lineWidth: 4)
+                                .frame(width: 250, height: 50)
+                                .background(
+                                    Capsule()
+                                        .fill(.green)                             .cornerRadius(20)
+                                )
+                        } else {
+                            Capsule()
+                                .strokeBorder(Color.blue, lineWidth: 4)
+                                .frame(width: 250, height: 50)
+                                .background(
+                                Capsule()
+                                    .fill(.blue)
+                                    .cornerRadius(20)
+                                )
+                        }
+                        
                         HStack {
                             Text(favoriteText)
-                            Image(systemName: "heart")
-                                .foregroundColor(isFavorited ? Color.red : Color.blue)
+                                .foregroundColor(.white)
+                            Image(systemName: isFavorited ? "heart.fill" : "heart")
+                                .foregroundColor(isFavorited ? .white : .white)
                                 
                         }
                     }
@@ -134,6 +151,7 @@ struct CharacterDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let model = CharacterViewModel()
         CharacterDetailsView(character: (model.characterData?.results[0])!)
+//            .environmentObject(Favorites())
           
     }
 }
