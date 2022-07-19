@@ -16,17 +16,14 @@ struct ContentView: View {
         
         NavigationView {
           
-                List {
-                        ForEach(self.model.characterData?.results ?? []) { character in
-                            
-                            NavigationLink {
-                                CharacterDetailsView(character: model)
-                            } label: {
-                                
-                                CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
-                            }
+                List(model.characterData?.results ?? []){
+                   character in
+                        
+                        NavigationLink {
+                            CharacterDetailsView(character: character)
+                        } label: {
+                            CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
                         }
-                    
                 }
                 .navigationTitle("Characters")
                 .navigationBarItems(leading:
@@ -40,8 +37,8 @@ struct ContentView: View {
                 Button("Next") {
                     self.page += 1
                     model.nextPage(page: self.page)
-            } : nil )
-            }
+                } : nil )
+        }
         .phoneOnlyNavigationView()
     }
 }

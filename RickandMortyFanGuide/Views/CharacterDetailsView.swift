@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct CharacterDetailsView: View {
-    @ObservedObject var character: CharacterViewModel
+    
+    //Need to reference for detail view by relying on the list to assign the details. 
+ var character: CharacterResults
+    
+    
     
     @State private var isFavorited = false
   
@@ -27,7 +31,7 @@ struct CharacterDetailsView: View {
         ScrollView {
             VStack {
                 //MARK: - Image
-                AsyncImage(url: URL(string: character.characterData?.results[0].image ?? "")) {
+                AsyncImage(url: URL(string: character.image ?? "")) {
                     phase in
                     if let image = phase.image {
                         image
@@ -42,7 +46,7 @@ struct CharacterDetailsView: View {
             
 
                 VStack(alignment: .leading) {
-                    Text(character.characterData?.results[0].name ?? "")
+                    Text(character.name ?? "")
                         .font(.largeTitle)
                         .bold()
                         .padding(.leading)
@@ -53,7 +57,7 @@ struct CharacterDetailsView: View {
                             Image(systemName: "checkmark.circle")
                                 .font(.title)
                             Spacer()
-                            Text(character.characterData?.results[0].status ?? "")
+                            Text(character.status ?? "")
                                 .font(.title3)
                                 .foregroundColor(.secondary)
                         }
@@ -63,7 +67,7 @@ struct CharacterDetailsView: View {
                             Image(systemName: "person.circle")
                                 .font(.title)
                             Spacer()
-                            Text(character.characterData?.results[0].species ?? "")
+                            Text(character.species ?? "")
                                 .font(.title3)
                                 .foregroundColor(.secondary)
                         }
@@ -73,7 +77,7 @@ struct CharacterDetailsView: View {
                             Image(systemName: "house.circle")
                                 .font(.title)
                             Spacer()
-                            Text(character.characterData?.results[0].origin?.name ?? "")
+                            Text(character.origin?.name ?? "")
                                 .font(.title3)
                                 .foregroundColor(.secondary)
                         }
@@ -82,7 +86,7 @@ struct CharacterDetailsView: View {
                             Image(systemName: "mappin.circle")
                                 .font(.title)
                             Spacer()
-                            Text(character.characterData?.results[0].location?.name ?? "")
+                            Text(character.location?.name ?? "")
                                 .font(.title3)
                                 .foregroundColor(.secondary)
                         }
@@ -127,9 +131,9 @@ struct CharacterDetailsView: View {
 
 struct CharacterDetailsView_Previews: PreviewProvider {
 
-   
     static var previews: some View {
-        CharacterDetailsView(character: CharacterViewModel())
+        let model = CharacterViewModel()
+        CharacterDetailsView(character: (model.characterData?.results[0])!)
           
     }
 }
