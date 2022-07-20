@@ -23,7 +23,7 @@ struct CharacterResults: Codable, Identifiable {
     
 
     
-    let id = UUID()
+    let id: Int
     var name: String?
     var status: String?
     var species: String?

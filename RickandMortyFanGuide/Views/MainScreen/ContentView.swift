@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var model = CharacterViewModel()
+    @StateObject var favorites = Favorites()
     @State private var page = 1
     
     var body: some View {
@@ -22,7 +23,17 @@ struct ContentView: View {
                         NavigationLink {
                             CharacterDetailsView(character: character)
                         } label: {
-                            CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
+                            HStack{
+                                CharacterRowView(imageUrlString: character.image, name: character.name, species: character.species)
+                                
+                                if favorites.contains(character) {
+                                    Spacer()
+                                    Image(systemName: "heart.fill")
+                                        .accessibilityLabel("This is a favorite character")
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        
                         }
                 }
                 .navigationTitle("Characters")
@@ -40,6 +51,7 @@ struct ContentView: View {
                 } : nil )
         }
         .phoneOnlyNavigationView()
+        .environmentObject(favorites)
     }
 }
 

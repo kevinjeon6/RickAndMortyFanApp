@@ -12,8 +12,8 @@ struct CharacterDetailsView: View {
     //Need to reference for detail view by relying on the list to assign the details. 
  var character: CharacterResults
     
-    
-    
+    @EnvironmentObject var favorites: Favorites
+   
     @State private var isFavorited = false
   
     
@@ -65,10 +65,16 @@ struct CharacterDetailsView: View {
 
                 }
                 
+           
+                
                 Button {
                     isFavorited.toggle()
+                    if favorites.contains(character) {
+                        favorites.remove(character)
+                    } else {
+                        favorites.add(character)
+                    }
                    
-                  
                 } label: {
                     ZStack {
                         if isFavorited == false {
@@ -105,6 +111,7 @@ struct CharacterDetailsView: View {
                 
             }
         }
+       
     }
     
     
@@ -116,7 +123,7 @@ struct CharacterDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let model = CharacterViewModel()
         CharacterDetailsView(character: (model.characterData?.results[0])!)
-//            .environmentObject(Favorites())
+            .environmentObject(Favorites())
           
     }
 }
