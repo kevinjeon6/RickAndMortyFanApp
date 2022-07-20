@@ -53,48 +53,17 @@ struct CharacterDetailsView: View {
                        
                     
                     Section {
-                        HStack {
-                            Image(systemName: "checkmark.circle")
-                                .font(.title)
-                            Spacer()
-                            Text(character.status ?? "")
-                                .font(.title3)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 5)
-                       
-                        HStack {
-                            Image(systemName: "person.circle")
-                                .font(.title)
-                            Spacer()
-                            Text(character.species ?? "")
-                                .font(.title3)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 5)
+                        SubDetailView(sfImageString: "checkmark.circle", detailText: character.status)
                         
-                        HStack {
-                            Image(systemName: "house.circle")
-                                .font(.title)
-                            Spacer()
-                            Text(character.origin?.name ?? "")
-                                .font(.title3)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 5)
-                        HStack {
-                            Image(systemName: "mappin.circle")
-                                .font(.title)
-                            Spacer()
-                            Text(character.location?.name ?? "")
-                                .font(.title3)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 5)
+                        SubDetailView(sfImageString: "person.circle", detailText: character.species)
+                       
+                        SubDetailView(sfImageString: "house.circle", detailText: character.origin?.name)
+                        
+                        SubDetailView(sfImageString: "mappin.circle", detailText: character.location?.name)
                     }
-//                header: {
-//                        Text("Character Information")
-//                    }
+                header: {
+                        Text("Character Information")
+                    }
                     .padding(.horizontal)
 
                    
