@@ -10,12 +10,14 @@ import SwiftUI
 struct SubDetailView: View {
     
     var sfImageString: String
+    var infoText: String
     var detailText: String?
     
     var body: some View {
         HStack {
             Image(systemName: sfImageString)
                 .font(.title)
+            Text(infoText)
             Spacer()
             Text(detailText ?? "")
                 .font(.title3)

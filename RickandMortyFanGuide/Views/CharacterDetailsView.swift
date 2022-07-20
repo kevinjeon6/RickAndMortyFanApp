@@ -53,20 +53,16 @@ struct CharacterDetailsView: View {
                        
                     
                     Section {
-                        SubDetailView(sfImageString: "checkmark.circle", detailText: character.status)
+                        SubDetailView(sfImageString: "checkmark.circle", infoText: "Status", detailText: character.status)
                         
-                        SubDetailView(sfImageString: "person.circle", detailText: character.species)
+                        SubDetailView(sfImageString: "person.circle", infoText: "Species", detailText: character.species)
                        
-                        SubDetailView(sfImageString: "house.circle", detailText: character.origin?.name)
+                        SubDetailView(sfImageString: "house.circle", infoText: "Origin", detailText: character.origin?.name)
                         
-                        SubDetailView(sfImageString: "mappin.circle", detailText: character.location?.name)
-                    }
-                header: {
-                        Text("Character Information")
+                        SubDetailView(sfImageString: "mappin.circle", infoText: "Location", detailText: character.location?.name)
                     }
                     .padding(.horizontal)
 
-                   
                 }
                 
                 Button {
@@ -124,3 +120,5 @@ struct CharacterDetailsView_Previews: PreviewProvider {
           
     }
 }
+
+
