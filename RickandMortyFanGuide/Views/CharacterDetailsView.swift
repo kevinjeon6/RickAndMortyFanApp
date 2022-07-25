@@ -10,7 +10,7 @@ import SwiftUI
 struct CharacterDetailsView: View {
     
     //Need to reference for detail view by relying on the list to assign the details. 
- var character: CharacterResults
+ var character: Character
     
     @EnvironmentObject var favorites: Favorites
    
@@ -31,7 +31,7 @@ struct CharacterDetailsView: View {
         ScrollView {
             VStack {
                 //MARK: - Image
-                AsyncImage(url: URL(string: character.image ?? "")) {
+                AsyncImage(url: URL(string: character.image)) {
                     phase in
                     if let image = phase.image {
                         image
@@ -46,7 +46,7 @@ struct CharacterDetailsView: View {
             
 
                 VStack(alignment: .leading) {
-                    Text(character.name ?? "")
+                    Text(character.name)
                         .font(.largeTitle)
                         .bold()
                         .padding(.leading)
@@ -57,9 +57,9 @@ struct CharacterDetailsView: View {
                         
                         SubDetailView(sfImageString: "person.circle", infoText: "Species", detailText: character.species)
                        
-                        SubDetailView(sfImageString: "house.circle", infoText: "Origin", detailText: character.origin?.name)
+                        SubDetailView(sfImageString: "house.circle", infoText: "Origin", detailText: character.origin.name)
                         
-                        SubDetailView(sfImageString: "mappin.circle", infoText: "Location", detailText: character.location?.name)
+                        SubDetailView(sfImageString: "mappin.circle", infoText: "Location", detailText: character.location.name)
                     }
                     .padding(.horizontal)
 
@@ -122,7 +122,7 @@ struct CharacterDetailsView_Previews: PreviewProvider {
 
     static var previews: some View {
         let model = CharacterViewModel()
-        CharacterDetailsView(character: (model.characterData?.results[0])!)
+        CharacterDetailsView(character: (model.characters[0]))
             .environmentObject(Favorites())
           
     }

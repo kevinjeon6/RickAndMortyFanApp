@@ -5,19 +5,39 @@
 //  Created by Kevin Mattocks on 6/17/22.
 //
 
+
+
 import SwiftUI
 
 struct ContentView: View {
     @StateObject var model = CharacterViewModel()
     @StateObject var favorites = Favorites()
-    @State private var page = 1
+//    @State private var searchText = ""
+//     var filterResults = CharacterViewModel()
+
+    
+    
+    //MARK: - Filter List
+//    var filteredCharacters: [Character] {
+//        if searchText.isEmpty {
+//            return model.characters
+//        } else {
+//            return model.characters.filter {
+//                $0.name.localizedCaseInsensitiveContains(searchText)
+//            }
+//        }
+//    }
+
+    
+
+    
     
     var body: some View {
 
         
         NavigationView {
           
-                List(model.characterData?.results ?? []){
+            List(model.filteredCharacters){
                    character in
                         
                         NavigationLink {
@@ -35,21 +55,39 @@ struct ContentView: View {
                             }
                         
                         }
-                }
-                .navigationTitle("Characters")
-                .navigationBarItems(leading:
-                self.page > 1 ?
+            }
+            .searchable(text: $model.searchText, prompt: "Search for a character")
+            .onChange(of: model.searchText, perform: { newValue in
+               Task {
+                  
+                       await model.fetchallCharacters()
+             
+                   
+                }         })
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("Previous") {
-                    self.page -= 1
-                        model.previousPage(page: self.page)
-                } : nil,
-                trailing:
-                self.page <= 43 ?
-                Button("Next") {
-                    self.page += 1
-                    model.nextPage(page: self.page)
-                } : nil )
-        }
+                        Task {
+                            await model.previousPage()
+                            
+                        }
+                    }
+                    .disabled(!model.hasPreviousPage)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Next") {
+                        Task {
+                            await model.nextPage()
+                        }
+                    }
+                    .disabled(!model.hasNextPage)
+                }
+            }
+            .navigationBarTitle("Characters")
+        }//Navigationview
+        .task({
+            await model.fetchallCharacters()
+        })
         .phoneOnlyNavigationView()
         .environmentObject(favorites)
     }

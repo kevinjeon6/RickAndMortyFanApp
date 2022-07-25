@@ -8,113 +8,85 @@
 
 import Foundation
 
+@MainActor
 class CharacterViewModel: ObservableObject {
-    @Published var characterData: Character?
-    
-    
+    @Published var characters: [Character] = []
 
- 
+    //Don't need an init() method as all properties of this class has default values
+    //Using concurrency features
     
-    init() {
-//        getCharacterData()
-        fetchallCharacters(page: 1) { [weak self] char in
-           // DispatchQueue.main.async {
-                self?.characterData = char
-            //}
+    @Published var searchText = ""
+    
+    
+    var filteredCharacters: [Character] {
+        if searchText.isEmpty {
+            return characters
+        } else {
+            return characters.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
+    
+    private(set) var maxPages = 1
+    private(set) var currentPage = 1
+    
+    private(set) var hasPreviousPage: Bool = false
+    private(set) var hasNextPage: Bool = true
+    
+    
+    struct CharacterResults: Codable {
+        var info: Info
+        var results: [Character]
+        
+        struct Info: Codable {
+            var pages: Int
+            var next: URL?
+            var prev: URL?
         }
     }
     
 
-    
-    //MARK: - Character Data
-//    func getCharacterData(){
-//
-//        //Create url String
-//        let characterURL = "https://rickandmortyapi.com/api/character"
-//
-//        //Create a URL Object
-//        //Make sure that url is true else false
-//        guard let url = URL(string: characterURL) else {
-//            print("Bad URL: \(characterURL)")
-//            return
-//        }
-//
-//        //Create a URL Request
-//        let request = URLRequest(url: url)
-//
-//        //Create a URL session
-//        let session = URLSession.shared
-//        let dataTask = session.dataTask(with: request) { data, response, error in
-//            //Make sure that error is true else return false
-//            guard error == nil else {
-//                return
-//            }
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                let result = try decoder.decode(Character.self, from: data!)
-//
-//                DispatchQueue.main.async {
-//                    self.characterData = result
-//                }
-//            } catch {
-//                print(error)
-//            }
-//        }
-//        dataTask.resume()
-//
-//    }//func getCharacter
 
 
     //MARK: - Fetch all Characters
     
-    //Closure is going to provide all the character data for that particular page number
-    func fetchallCharacters(page: Int, completion: @escaping ((Character) -> ())) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(page)") else {
+    
+    func fetchallCharacters() async {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(currentPage)&name=\(searchText.trimmed())") else {
             fatalError("Bad URL")
         }
         
-        let request = URLRequest(url: url)
-        
-        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Request error:", error)
-                return
-            }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let decodedCharacters = try JSONDecoder().decode(CharacterResults.self, from: data)
+            maxPages = decodedCharacters.info.pages
+            hasPreviousPage = decodedCharacters.info.prev != nil
+            hasNextPage = decodedCharacters.info.next != nil
             
-            
-            
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(Character.self, from: data!)
-                
-                DispatchQueue.main.async {
-                    //Calling our completion closure which passes in the result
-                    completion(result)
-                }
-            } catch {
-                print(error)
-            }
+            characters = decodedCharacters.results
+        } catch {
+             characters = []
         }
-        dataTask.resume()
-                
     }
+    
+
     
     
     //MARK: - Next page
-    func nextPage(page: Int) {
-        //adding weak self since it is calling on the background
-        fetchallCharacters(page: page) { [weak self ] char in
-            self?.characterData = char
-        }
+    func nextPage() async {
+      //Update current page and fetch JSON
+        currentPage += 1
+        await fetchallCharacters()
     }
     
     
     //MARK: - Previous page
-    func previousPage(page: Int) {
-        fetchallCharacters(page: page) { [weak self ] char in
-            self?.characterData = char
-        }
+    func previousPage() async {
+       //Update current page and fetch JSON
+        currentPage -= 1
+        await fetchallCharacters()
     }
     
     

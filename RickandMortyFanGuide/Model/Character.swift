@@ -9,27 +9,17 @@ import Foundation
 import SwiftUI
 
 
-
-
-struct Character: Codable {
-   
-    var results: [CharacterResults]
-}
-
-
-
-
-struct CharacterResults: Codable, Identifiable {
+struct Character: Codable, Identifiable {
     
 
     
     let id: Int
-    var name: String?
-    var status: String?
-    var species: String?
-    var origin: Origin?
-    var location: Location?
-    var image: String?
+    var name: String
+    var status: String
+    var species: String
+    var origin: Origin
+    var location: Location
+    var image: String
     
 
    
