@@ -18,7 +18,6 @@ struct CharacterDetailsView: View {
     @State private var isFavorited = false
   
     
-    
     var favoriteText: String {
         if isFavorited  {
             return "Favorited"
@@ -73,6 +72,9 @@ struct CharacterDetailsView: View {
             }
         }
         .padding(.vertical)
+        .onAppear {
+             isFavorited = favorites.contains(character)
+          }
     }
  
     
@@ -93,7 +95,7 @@ struct CharacterDetailsView: View {
                     }
                 }
             
-
+                //MARK: - Character Details
                 VStack(alignment: .leading) {
                     Text(character.name)
                         .font(.largeTitle)
@@ -114,11 +116,9 @@ struct CharacterDetailsView: View {
 
                 }
                 
-           
+           //MARK: - Favorite Button
+                
             favoriteButton
-             
-               
-
                 
             }
         }
