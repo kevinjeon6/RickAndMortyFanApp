@@ -14,6 +14,7 @@ struct CharacterDetailsView: View {
     
     @EnvironmentObject var favorites: Favorites
    
+    
     @State private var isFavorited = false
   
     
@@ -24,6 +25,54 @@ struct CharacterDetailsView: View {
         } else {
             return "Favorite"
         }
+    }
+    
+    var favoriteButton: some View {
+        Button {
+            isFavorited.toggle()
+           
+            
+            if favorites.contains(character) {
+                //If favorites contains a character, we are trying to un-favorite and remove it
+                favorites.remove(character)
+            } else {
+                favorites.add(character)
+            }
+           
+        } label: {
+            ZStack {
+                if isFavorited == false {
+                    Capsule()
+                        .strokeBorder(Color.green, lineWidth: 4)
+                        .frame(width: 250, height: 50)
+                        .background(
+                            Capsule()
+                                .fill(.green)
+                                .cornerRadius(20)
+                        )
+                
+                } else {
+                    Capsule()
+                        .strokeBorder(Color.blue, lineWidth: 4)
+                        .frame(width: 250, height: 50)
+                        .background(
+                        Capsule()
+                            .fill(.blue)
+                            .cornerRadius(20)
+                        )
+                        
+                }
+                
+                HStack {
+                    Text(favoriteText)
+                        .foregroundColor(.white)
+                    Image(systemName: favorites.contains(character) ? "heart.fill" : "heart")
+                        .foregroundColor(favorites.contains(character) ? .white : .white)
+                        
+                }
+            }
+        }
+        .padding(.vertical)
     }
  
     
@@ -66,46 +115,8 @@ struct CharacterDetailsView: View {
                 }
                 
            
-                
-                Button {
-                    isFavorited.toggle()
-                    if favorites.contains(character) {
-                        favorites.remove(character)
-                    } else {
-                        favorites.add(character)
-                    }
-                   
-                } label: {
-                    ZStack {
-                        if isFavorited == false {
-                            Capsule()
-                                .strokeBorder(Color.green, lineWidth: 4)
-                                .frame(width: 250, height: 50)
-                                .background(
-                                    Capsule()
-                                        .fill(.green)                             .cornerRadius(20)
-                                )
-                        } else {
-                            Capsule()
-                                .strokeBorder(Color.blue, lineWidth: 4)
-                                .frame(width: 250, height: 50)
-                                .background(
-                                Capsule()
-                                    .fill(.blue)
-                                    .cornerRadius(20)
-                                )
-                        }
-                        
-                        HStack {
-                            Text(favoriteText)
-                                .foregroundColor(.white)
-                            Image(systemName: isFavorited ? "heart.fill" : "heart")
-                                .foregroundColor(isFavorited ? .white : .white)
-                                
-                        }
-                    }
-                }
-                .padding(.vertical)
+            favoriteButton
+             
                
 
                 
