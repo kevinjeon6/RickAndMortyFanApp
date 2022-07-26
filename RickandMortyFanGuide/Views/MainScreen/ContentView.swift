@@ -12,28 +12,28 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var model = CharacterViewModel()
     @StateObject var favorites = Favorites()
-//    @State private var searchText = ""
-//     var filterResults = CharacterViewModel()
+    
+    var previousButton: some View {
+        Button("Previous") {
+            Task {
+                await model.previousPage()
+            }
+        }
+        .disabled(!model.hasPreviousPage)
+    }
+    
+    var nextButton: some View {
+        Button("Next") {
+            Task {
+                await model.nextPage()
+            }
+        }
+        .disabled(!model.hasNextPage)
+    }
 
-    
-    
-    //MARK: - Filter List
-//    var filteredCharacters: [Character] {
-//        if searchText.isEmpty {
-//            return model.characters
-//        } else {
-//            return model.characters.filter {
-//                $0.name.localizedCaseInsensitiveContains(searchText)
-//            }
-//        }
-//    }
 
-    
-
-    
-    
+    //MARK: - Body
     var body: some View {
-
         
         NavigationView {
           
@@ -59,28 +59,16 @@ struct ContentView: View {
             .searchable(text: $model.searchText, prompt: "Search for a character")
             .onChange(of: model.searchText, perform: { newValue in
                Task {
-                  
                        await model.fetchallCharacters()
              
-                   
-                }         })
+                }
+            })
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Previous") {
-                        Task {
-                            await model.previousPage()
-                            
-                        }
-                    }
-                    .disabled(!model.hasPreviousPage)
+                previousButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Next") {
-                        Task {
-                            await model.nextPage()
-                        }
-                    }
-                    .disabled(!model.hasNextPage)
+                 nextButton
                 }
             }
             .navigationBarTitle("Characters")
