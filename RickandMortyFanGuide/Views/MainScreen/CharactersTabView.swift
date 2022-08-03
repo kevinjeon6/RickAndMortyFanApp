@@ -15,7 +15,7 @@ struct CharactersTabView: View {
         TabView {
             
             //MARK: - Character Tab
-            ContentView()
+            CharacterView()
                 .tabItem {
                     Label("Characters", systemImage: "person.3.fill")
                 }

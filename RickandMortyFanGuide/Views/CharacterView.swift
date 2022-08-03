@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CharacterView: View {
     @EnvironmentObject var model: CharacterViewModel
     @EnvironmentObject var favorites: Favorites
     //Creating the property of the same type (Favorites) can access the data and get updated when the data changes
@@ -84,7 +84,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CharacterView()
            
     }
 }
