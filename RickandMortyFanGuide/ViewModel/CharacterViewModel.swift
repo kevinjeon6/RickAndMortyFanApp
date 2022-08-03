@@ -57,36 +57,43 @@ class CharacterViewModel: ObservableObject {
         guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(currentPage)&name=\(searchText.trimmed())") else {
             fatalError("Bad URL")
         }
-        
+
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decodedCharacters = try JSONDecoder().decode(CharacterResults.self, from: data)
             maxPages = decodedCharacters.info.pages
+
+         
+            for result in decodedCharacters.results {
+                 characters.append(result)
+            }
+
             hasPreviousPage = decodedCharacters.info.prev != nil
-            hasNextPage = decodedCharacters.info.next != nil
-            
-            characters = decodedCharacters.results
+            if decodedCharacters.info.next != nil {
+               await fetchallCharacters(page: page+1)
+
+            }
         } catch {
              characters = []
         }
     }
-    
+
 
     
     
     //MARK: - Next page
     func nextPage() async {
       //Update current page and fetch JSON
-        currentPage += 1
-        await fetchallCharacters()
+//        currentPage += 1
+        await fetchallCharacters(page: +1)
     }
     
     
     //MARK: - Previous page
     func previousPage() async {
        //Update current page and fetch JSON
-        currentPage -= 1
-        await fetchallCharacters()
+//        currentPage -= 1
+        await fetchallCharacters(page: -1)
     }
     
     
