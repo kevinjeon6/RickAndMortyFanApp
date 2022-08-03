@@ -20,6 +20,8 @@
 		749E5133285CE222007CBFBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749E5132285CE222007CBFBA /* LaunchScreen.storyboard */; };
 		74B58F5E2877594200EBC2F3 /* CharacterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */; };
 		74B9B963287874540042889A /* CharacterDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B9B962287874540042889A /* CharacterDetailsView.swift */; };
+		74C7D2BA2891B530007EA1C5 /* CharactersTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C7D2B92891B530007EA1C5 /* CharactersTabView.swift */; };
+		74C7D2BC2891B557007EA1C5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C7D2BB2891B557007EA1C5 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		749E5132285CE222007CBFBA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRowView.swift; sourceTree = "<group>"; };
 		74B9B962287874540042889A /* CharacterDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsView.swift; sourceTree = "<group>"; };
+		74C7D2B92891B530007EA1C5 /* CharactersTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTabView.swift; sourceTree = "<group>"; };
+		74C7D2BB2891B557007EA1C5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 				74B58F5D2877594200EBC2F3 /* CharacterRowView.swift */,
 				74B9B962287874540042889A /* CharacterDetailsView.swift */,
 				747A461D2887371A005E7C80 /* SubDetailView.swift */,
+				74C7D2BB2891B557007EA1C5 /* FavoritesView.swift */,
+				749E5125285CE050007CBFBA /* ContentView.swift */,
 				74B9B9612878735D0042889A /* MainScreen */,
 			);
 			path = Views;
@@ -139,7 +145,7 @@
 		74B9B9612878735D0042889A /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				749E5125285CE050007CBFBA /* ContentView.swift */,
+				74C7D2B92891B530007EA1C5 /* CharactersTabView.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -223,9 +229,11 @@
 				7485ADFA285D06AD00905391 /* Character.swift in Sources */,
 				747DDB50288EF5040032FC53 /* String.swift in Sources */,
 				749E5126285CE050007CBFBA /* ContentView.swift in Sources */,
+				74C7D2BA2891B530007EA1C5 /* CharactersTabView.swift in Sources */,
 				74353AB02885E36700F8B2EB /* ViewExtension.swift in Sources */,
 				749E5124285CE050007CBFBA /* RickandMortyFanGuideApp.swift in Sources */,
 				747A461C28872A52005E7C80 /* Favorites.swift in Sources */,
+				74C7D2BC2891B557007EA1C5 /* FavoritesView.swift in Sources */,
 				747A461E2887371A005E7C80 /* SubDetailView.swift in Sources */,
 				74B58F5E2877594200EBC2F3 /* CharacterRowView.swift in Sources */,
 				74B9B963287874540042889A /* CharacterDetailsView.swift in Sources */,
