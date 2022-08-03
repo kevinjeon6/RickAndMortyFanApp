@@ -10,8 +10,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = CharacterViewModel()
-    @StateObject var favorites = Favorites()
+    @EnvironmentObject var model: CharacterViewModel
+    @EnvironmentObject var favorites: Favorites
+    //Creating the property of the same type (Favorites) can access the data and get updated when the data changes
     
     var previousButton: some View {
         Button("Previous") {
@@ -58,10 +59,9 @@ struct ContentView: View {
             }
             .searchable(text: $model.searchText, prompt: "Search for a character")
             .onChange(of: model.searchText, perform: { newValue in
-               Task {
-                       await model.fetchallCharacters()
-             
-                }
+                    Task {
+                        await model.fetchallCharacters()
+                     }
             })
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -77,12 +77,14 @@ struct ContentView: View {
             await model.fetchallCharacters()
         })
         .phoneOnlyNavigationView()
-        .environmentObject(favorites)
+//        .environmentObject(favorites)
+        //attaching favorites to the environment on NavigationView. So every view the nagivation view presents will also gain that Favorites instace to work with
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+           
     }
 }

@@ -11,7 +11,10 @@ import SwiftUI
 struct RickandMortyFanGuideApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharactersTabView()
+                .environmentObject(CharacterViewModel())
+                .environmentObject(Favorites())
+            
         }
     }
 }

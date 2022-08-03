@@ -10,14 +10,14 @@ import SwiftUI
 struct CharacterDetailsView: View {
     
     //Need to reference for detail view by relying on the list to assign the details. 
- var character: Character
+    var character: Character
     
     @EnvironmentObject var favorites: Favorites
    
     
     @State private var isFavorited = false
   
-    
+    //MARK: - Computed Property
     var favoriteText: String {
         if isFavorited  {
             return "Favorited"
@@ -26,16 +26,18 @@ struct CharacterDetailsView: View {
         }
     }
     
+    //MARK: - Favorite Button Supplementary view
     var favoriteButton: some View {
         Button {
             isFavorited.toggle()
-           
+    
             
             if favorites.contains(character) {
                 //If favorites contains a character, we are trying to un-favorite and remove it
                 favorites.remove(character)
             } else {
                 favorites.add(character)
+
             }
            
         } label: {
@@ -78,6 +80,7 @@ struct CharacterDetailsView: View {
     }
  
     
+    //MARK: - Body
     var body: some View {
         ScrollView {
             VStack {
@@ -103,7 +106,7 @@ struct CharacterDetailsView: View {
                         .padding(.leading)
                        
                     
-                    Section {
+                    VStack(spacing: 5) {
                         SubDetailView(sfImageString: "checkmark.circle", infoText: "Status", detailText: character.status)
                         
                         SubDetailView(sfImageString: "person.circle", infoText: "Species", detailText: character.species)
@@ -111,6 +114,7 @@ struct CharacterDetailsView: View {
                         SubDetailView(sfImageString: "house.circle", infoText: "Origin", detailText: character.origin.name)
                         
                         SubDetailView(sfImageString: "mappin.circle", infoText: "Location", detailText: character.location.name)
+                         
                     }
                     .padding(.horizontal)
 
@@ -122,11 +126,7 @@ struct CharacterDetailsView: View {
                 
             }
         }
-       
     }
-    
-    
-  
 }
 
 struct CharacterDetailsView_Previews: PreviewProvider {
