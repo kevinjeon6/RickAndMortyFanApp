@@ -11,7 +11,7 @@ struct SubDetailView: View {
     
     var sfImageString: String
     var infoText: String
-    var detailText: String?
+    var detailText: String
     
     var body: some View {
         HStack {
@@ -19,9 +19,12 @@ struct SubDetailView: View {
                 .font(.title)
             Text(infoText)
             Spacer()
-            Text(detailText ?? "")
+            Text(detailText)
                 .font(.title3)
                 .foregroundColor(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
+                
         }
         .padding(.vertical, 5)
     }
